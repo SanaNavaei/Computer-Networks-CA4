@@ -2,7 +2,7 @@
 
 int main() {
 
-    TCPconnection connection(/*3 inputs*/);
+    TCPconnection connection();
     connection.run();
   
     return 0;
