@@ -6,9 +6,7 @@
 class TCPconnection 
 {
 private: 
-  int cwnd;
-  int ssthresh
-  int rtt;
+
 public:
   TCPconnection();
   void run();
