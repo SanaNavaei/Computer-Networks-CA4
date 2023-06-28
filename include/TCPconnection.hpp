@@ -11,6 +11,7 @@ private:
   int rtt;
 public:
   TCPconnection();
+  void run();
 }
 
 #endif
