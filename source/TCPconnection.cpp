@@ -7,7 +7,8 @@ TCPconnection::TCPconnection();
 
 void TCPconnection::run()
 {
-    Reno reno_connnection(/*attributes*/);
-    NewReno newReno_connection(/*attributes*/);
-    BBR bbr_connection(/*attributes*/);
+    Reno reno_connnection(Mechanism/*attributes*/);
+    NewReno newReno_connection(Mechanism/*attributes*/);
+    BBR bbr_connection(Mechanism/*attributes*/);
 }
+
