@@ -8,7 +8,7 @@ class BBR
 private: 
 
 public:
-
+  BBR(/*attributes*/);
 }
 
 #endif
