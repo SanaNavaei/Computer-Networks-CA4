@@ -6,9 +6,10 @@
 class Reno
 {
 private: 
+  std::vector<std::string> Mechanism;
 
 public:
-  Reno(/*attributes*/);
+  Reno(Mechanism_/*attributes*/);
 }
 
 #endif
