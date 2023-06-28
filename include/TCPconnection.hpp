@@ -11,7 +11,7 @@ private:
 
 public:
   TCPconnection();
-  std::vector<std::string> get_mechanisms();
+  //std::vector<std::string> get_mechanisms();
   void run();
 }
 
