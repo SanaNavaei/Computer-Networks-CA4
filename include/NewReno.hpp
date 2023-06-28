@@ -8,7 +8,7 @@ class NewReno
 private: 
 
 public:
-  NewReno(/*attributes*/);
+  NewReno(Mechanism_/*attributes*/);
 }
 
 #endif
