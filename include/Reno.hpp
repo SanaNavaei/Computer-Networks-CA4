@@ -8,7 +8,7 @@ class Reno
 private: 
 
 public:
-
+  Reno(/*attributes*/);
 }
 
 #endif
