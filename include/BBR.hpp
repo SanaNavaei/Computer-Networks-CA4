@@ -5,10 +5,11 @@
 
 class BBR
 {
-private: 
+private:
+  std::vector<std::string> Mechanism;
 
 public:
-  BBR(/*attributes*/);
+  BBR(Mechanism_/*attributes*/);
 }
 
 #endif
