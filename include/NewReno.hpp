@@ -6,6 +6,7 @@
 class NewReno
 {
 private: 
+  std::vector<std::string> Mechanism;
 
 public:
   NewReno(Mechanism_/*attributes*/);
