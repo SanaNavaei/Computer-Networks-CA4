@@ -2,6 +2,21 @@
 **Maryam Jafarabadi Ashtiani : 810199549**  
 **Sana Sari Navaei : 810199435**  
 
+- [Introduction](#introduction)
+- [Algorithms](#algorithms)
+    - [Reno](#reno)
+    - [NewReno](#new-reno)
+    - [BBR](#bbr)
+- [Code Description](#code-description)
+- [Results](#results)
+- [Questions](#questions)
+    - [Q1](#q1)
+    - [Q2](#q2)
+    - [Q3](#q3)
+    - [Q4](#q4)
+    - [Q5](#q5)
+    - [Q6](#q6)
+
 # Introduction  
 This project focuses on studying TCP congestion control algorithms, specifically BBR, Reno, and New Reno. The goal is to understand how these algorithms manage data flow over a network and prevent congestion.  
 
@@ -28,3 +43,24 @@ The BBR algorithm has two main phases: startup and congestion avoidance. During 
 Once the bottleneck bandwidth is determined, BBR enters the congestion avoidance phase. It aims to maintain a stable sending rate that does not exceed the estimated bottleneck bandwidth. BBR achieves this by using a model-based approach that adjusts the sending rate based on the observed RTT and the estimated bandwidth.  
 One of the key advantages of BBR is its ability to react quickly to changing network conditions. It responds more efficiently to congestion signals compared to traditional algorithms like TCP Reno or Cubic. BBR achieves high throughput, low latency, and improved network utilization, making it well-suited for modern high-speed networks.  
 BBR also considers the presence of competing flows in the network. It uses a mechanism called "proportional share" to allocate bandwidth fairly among different flows, ensuring that each flow receives its fair share of the available capacity.
+
+# Code Description  
+
+# Results  
+
+# Questions  
+
+## Q1  
+Congestion control and flow control are two important mechanisms in computer networks that work together to ensure efficient and reliable data transmission.  
+Congestion control is primarily concerned with managing and preventing network congestion. Network congestion occurs when the demand for network resources exceeds the available capacity, leading to degraded performance, increased packet loss, and delays. The goal of congestion control is to regulate the rate at which data is sent into the network to prevent congestion from occurring or to alleviate it if it does occur.  
+On the other hand, flow control operates at the transport layer and focuses on regulating the flow of data between the sender and receiver. It ensures that the receiver can handle the incoming data at a pace it can process without overwhelming its buffer capacity. Flow control prevents the sender from transmitting data faster than the receiver can handle, avoiding data loss or buffer overflow situations.  
+In summary, congestion control manages and prevents network congestion to optimize overall network performance, while flow control regulates the flow of data between sender and receiver to ensure a smooth and efficient data transfer process. Both mechanisms work together to ensure reliable and efficient communication in computer networks.  
+## Q2  
+
+## Q3  
+
+## Q4  
+
+## Q5  
+
+## Q6  
