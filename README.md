@@ -54,8 +54,13 @@ BBR also considers the presence of competing flows in the network. It uses a mec
 Congestion control and flow control are two important mechanisms in computer networks that work together to ensure efficient and reliable data transmission.  
 Congestion control is primarily concerned with managing and preventing network congestion. Network congestion occurs when the demand for network resources exceeds the available capacity, leading to degraded performance, increased packet loss, and delays. The goal of congestion control is to regulate the rate at which data is sent into the network to prevent congestion from occurring or to alleviate it if it does occur.  
 On the other hand, flow control operates at the transport layer and focuses on regulating the flow of data between the sender and receiver. It ensures that the receiver can handle the incoming data at a pace it can process without overwhelming its buffer capacity. Flow control prevents the sender from transmitting data faster than the receiver can handle, avoiding data loss or buffer overflow situations.  
-In summary, congestion control manages and prevents network congestion to optimize overall network performance, while flow control regulates the flow of data between sender and receiver to ensure a smooth and efficient data transfer process. Both mechanisms work together to ensure reliable and efficient communication in computer networks.  
+In summary, congestion control manages and prevents network congestion to optimize overall network performance, while flow control regulates the flow of data between sender and receiver to ensure a smooth and efficient data transfer process. Both mechanisms work together to ensure reliable and efficient communication in computer networks. 
+
 ## Q2  
+The Reno algorithm is a TCP congestion control variant that enhances the performance and fairness of TCP connections in congested networks. It introduces a modified fast recovery mechanism to expedite recovery from packet loss.  
+During fast recovery, the sender retransmits the lost packet and continues sending new packets at a reduced rate. It monitors for duplicate acknowledgments (ACKs) from the receiver, indicating successful receipt of subsequent packets.  
+Upon receiving three duplicate ACKs, the sender performs a fast retransmit, retransmitting the missing packet without waiting for a timeout. It then enters a phase called "fast recovery" where it incrementally increases the congestion window, allowing for faster recovery and higher sending rates.  
+Compared to the original Reno algorithm, the New Reno algorithm minimizes unnecessary timeouts and retransmissions. This results in quicker recovery from packet loss and improved network performance and fairness.  
 
 ## Q3  
 
