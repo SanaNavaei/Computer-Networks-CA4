@@ -270,6 +270,7 @@ It aims to achieve higher bandwidth and lower latencies for internet traffic. BB
     - The main difference is that TCP Reno can't distinguish between full ACK and partial ACK while new Reno can. Therefore multiple packet loss is detected by new Reno. In context of protocol, TCP new Reno remains in the fast recovery until all the outstanding packets are acknowledged.  
 
 ## Q5  
+Between the reno and new reno algorithms, the new reno algorithm has a better performance and can send the number of packets in a lower rtt, so it has a higher efficiency. On the other hand, how to implement them is not much different from each other, so both are equally difficult. As it is clear in the output images of the results section, the new reno algorithm was able to send its packets in 519 rtt, but the reno algorithm did it in 523 rtt. So, among these two algorithms, new reno has priority.  
 
 ## Q6  
 - TCP Vegas: TCP Vegas uses round trip time for the increase or decrease of the congestion window. Expected and current throughput is measured whose difference is compared with some min and max threshold values. On the basis of the comparison we increase, decrease, or don’t change the congestion window.  
