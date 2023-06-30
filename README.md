@@ -66,6 +66,12 @@ TCP BBR (Bottleneck Bandwidth and Round-trip propagation time) is a congestion c
 It aims to achieve higher bandwidth and lower latencies for internet traffic. BBR differs from traditional loss-based congestion control algorithms by using measurements of the network's available bandwidth and round-trip time to adjust the sending rate. It operates at the point just before the onset of queuing, optimizing the flow's ability to utilize network resources without causing excessive delays or packet loss.  
 
 ## Q4  
+- BBR and Reno:  
+    - improved throughput: BBR is designed to maximize network throughput by dynamically estimating the available bandwidth and adjusting the sending rate accordingly. This can result in higher throughput compared to Reno.  
+    - Complexity: BBR is more complex than Reno and requires more sophisticated algorithms to estimate the available bandwidth and adjust the sending rate.  
+    - Reduced latency: BBR aims to minimize queuing delay and round-trip time (RTT) by probing the network to find the optimal sending rate. This can lead to lower latency and improved responsiveness for interactive applications.  
+- Reno and NewReno:  
+    - The main difference is that TCP Reno can't distinguish between full ACK and partial ACK while new Reno can. Therefore multiple packet loss is detected by new Reno. In context of protocol, TCP new Reno remains in the fast recovery until all the outstanding packets are acknowledged.  
 
 ## Q5  
 
