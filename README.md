@@ -215,6 +215,21 @@ void BBR::SendData()
     }
 }
 ```
+### onPacketLoss
+The function first checks if the counter variable is equal to 1 and the mechanism variable is set to Startup. This condition indicates that consecutive packets have been lost during the startup phase of the algorithm. In this case, the mechanism is changed to drain, which is a different congestion control mechanism.  
+If the mechanism variable is already set to drain, it is changed to probeBW. This indicates that the algorithm should transition from the drain phase to the probe bandwidth phase after a packet loss event.  
+Finally, the function returns 0, indicating that the packet loss event has been handled successfully.
+```c++
+int BBR::onPacketLoss()
+{
+  if(counter == 1 && mechanism == Startup)
+    change_mech(drain);
+  if (mechanism == drain)
+    change_mech(probeBW);
+
+  return 0;
+}
+```
 
 # Results  
 ## Reno  
