@@ -57,12 +57,13 @@ On the other hand, flow control operates at the transport layer and focuses on r
 In summary, congestion control manages and prevents network congestion to optimize overall network performance, while flow control regulates the flow of data between sender and receiver to ensure a smooth and efficient data transfer process. Both mechanisms work together to ensure reliable and efficient communication in computer networks. 
 
 ## Q2  
-The Reno algorithm is a TCP congestion control variant that enhances the performance and fairness of TCP connections in congested networks. It introduces a modified fast recovery mechanism to expedite recovery from packet loss.  
-During fast recovery, the sender retransmits the lost packet and continues sending new packets at a reduced rate. It monitors for duplicate acknowledgments (ACKs) from the receiver, indicating successful receipt of subsequent packets.  
-Upon receiving three duplicate ACKs, the sender performs a fast retransmit, retransmitting the missing packet without waiting for a timeout. It then enters a phase called "fast recovery" where it incrementally increases the congestion window, allowing for faster recovery and higher sending rates.  
-Compared to the original Reno algorithm, the New Reno algorithm minimizes unnecessary timeouts and retransmissions. This results in quicker recovery from packet loss and improved network performance and fairness.  
+TCP New Reno is an enhanced congestion control algorithm that improves upon the original TCP Reno algorithm. It effectively handles packet loss and congestion by implementing a fast recovery phase. When packet loss is detected, instead of reverting to slow start, the sender enters fast recovery. During this phase, the sender continues to send new packets, known as "partial acknowledgments," to maintain a higher sending rate and expedite congestion recovery.  
+Once all lost packets are successfully retransmitted and acknowledged, the sender exits fast recovery and transitions to the congestion avoidance phase. In this phase, the sender gradually increases the congestion window size to prevent triggering congestion again.  
+TCP New Reno optimizes TCP congestion control by reducing the time required to recover from packet loss and congestion, resulting in improved throughput and responsiveness.  
 
 ## Q3  
+TCP BBR (Bottleneck Bandwidth and Round-trip propagation time) is a congestion control algorithm developed by Google.  
+It aims to achieve higher bandwidth and lower latencies for internet traffic. BBR differs from traditional loss-based congestion control algorithms by using measurements of the network's available bandwidth and round-trip time to adjust the sending rate. It operates at the point just before the onset of queuing, optimizing the flow's ability to utilize network resources without causing excessive delays or packet loss.  
 
 ## Q4  
 
