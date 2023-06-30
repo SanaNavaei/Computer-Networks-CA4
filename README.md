@@ -188,6 +188,33 @@ void NewReno::SendData()
 ```
 
 ## BBR
+### sendData
+The function begins by checking if a timeout has occurred. If the timeout is not zero, it means that the sender is currently waiting for an acknowledgment and should not send any new data.  
+A loop is then executed to send new data packets. Inside the loop, a check is performed to determine if there is a loss probability. This check simulates packet loss in a controlled environment for testing purposes. If there is a loss probability, the **counter** variable is set to 1, indicating that a packet loss has occurred. If there is no loss probability and the "counter" variable is zero. In this case, the **LastByteAcked** variable is incremented by 1 to acknowledge the successful receipt of the packet, and the **data_size** variable is decreased by 1 to account for the sent packet. The **acked** array is updated to indicate that the packet at index **i** has been successfully received (setting acked[i] to 1). If there is a loss probability and the **counter** variable is not zero, it means that consecutive packets have been lost. In this case, the loop breaks to stop sending new packets until the lost packets are retransmitted.  
+Overall, this code snippet demonstrates the basic logic of sending data packets in the BBR algorithm, considering loss probabilities and acknowledging successful receipt of packets.  
+```c++
+void BBR::SendData()
+{
+    if (timeout != 0)
+      return;
+    
+    int AckTemp = LastByteAcked;
+    for (int i = AckTemp; i < DATA_SIZE && i < AckTemp + cwnd; i++)
+    {
+      bool lossProb = lossProbability();
+      if(lossProb)
+        counter = 1;
+      else if(counter == 0)
+      {
+        LastByteAcked += 1;
+        data_size -= 1;
+        acked[i] = 1;
+      }
+      else
+        break;
+    }
+}
+```
 
 # Results  
 ## Reno  
