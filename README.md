@@ -190,6 +190,17 @@ void NewReno::SendData()
 ## BBR
 
 # Results  
+## Reno  
+The output of the reno algorithm is as follows (due to the length of the output, the complete output has been avoided)  
+![reno_output](pictures/reno_output.png)  
+As shown in the figure, the last rtt is 523.  
+![reno2_output](pictures/reno2_output.png)  
+## NewReno  
+The output of the new reno algorithm is as follows (due to the length of the output, the complete output has been avoided). In reno and new reno algorithm, the mechanism is slow start at first. Then we go to fast recovery mode and then aimd. After that, the fast recovery mechanism and aimd are moved one by one, and if we draw its shape, the diagram will be in the form of consecutive triangles.  
+![newreno_output](pictures/newreno_output.png)  
+As shown in the figure, the last rtt is 519. So it can be concluded that the new reno algorithm works a little better than the reno algorithm, even though many of their functions are the same. This performance improvement is due to the presence of sack in the new reno algorithm.  
+![newreno2_output](pictures/newreno2_output.png)  
+## BBR  
 
 # Questions  
 
