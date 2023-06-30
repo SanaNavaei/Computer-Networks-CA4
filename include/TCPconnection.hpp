@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <vector>
+#include "../include/Reno.hpp"
+#include "../include/NewReno.hpp"
+#include "../include/BBR.hpp"
 
 class TCPconnection 
 {
@@ -11,7 +14,6 @@ private:
 
 public:
   TCPconnection();
-  //std::vector<std::string> get_mechanisms();
   void run();
 }
 
