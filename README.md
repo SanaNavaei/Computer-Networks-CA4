@@ -243,6 +243,10 @@ The output of the new reno algorithm is as follows (due to the length of the out
 As shown in the figure, the last rtt is 519. So it can be concluded that the new reno algorithm works a little better than the reno algorithm, even though many of their functions are the same. This performance improvement is due to the presence of sack in the new reno algorithm.  
 ![newreno2_output](pictures/newreno2_output.png)  
 ## BBR  
+This algorithm is in startup mode first. Then it goes to drain mode and after that it enters probeBW mode. When it reaches this mode, the mode alternately switches between probeBW and probeRTT. This algorithm works better because it sends packets in less time, so it works more efficiently.  
+![bbr_output](pictures/bbr_output.png)  
+As it is known, this algorithm sends the value of all packets in 37 rtt, so it works better than the previous two algorithms.  
+![bbr2_output](pictures/bbr2_output.png)  
 
 # Questions  
 
