@@ -9,7 +9,7 @@
 #define AIMD 1
 #define Fast_Recovery 2
 
-#define DATA_SIZE 10000
+#define DATA_SIZE 100000
 
 class NewReno
 {
