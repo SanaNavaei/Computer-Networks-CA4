@@ -43,9 +43,9 @@ void Reno::increment_cwnd(int num)
 
 bool Reno::lossProbability()
 {
-  if(rand() % 100 <= 95)
-    return 0;
-  return 1;
+  double x = static_cast<double>((std::pow(10 * 1000, static_cast<double>(cwnd - 1) / (999)) - 1) / 9999);
+  int p = static_cast<int>(1000 * x);
+  return rand() % 1000 < p;
 }
 
 void Reno::SendData()
