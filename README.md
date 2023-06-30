@@ -248,7 +248,7 @@ void BBR::onRTTUpdate()
   else if(mechanism == probeRTT)
     cwnd = 30;
 }
-
+```
 # Results  
 ## Reno  
 The output of the reno algorithm is as follows (due to the length of the output, the complete output has been avoided)  
@@ -293,6 +293,7 @@ It aims to achieve higher bandwidth and lower latencies for internet traffic. BB
 
 ## Q5  
 Between the reno and new reno algorithms, the new reno algorithm has a better performance and can send the number of packets in a lower rtt, so it has a higher efficiency. On the other hand, how to implement them is not much different from each other, so both are equally difficult. As it is clear in the output images of the results section, the new reno algorithm was able to send its packets in 519 rtt, but the reno algorithm did it in 523 rtt. So, among these two algorithms, new reno has priority.  
+But between new reno and bbr algorithm, bbr algorithm performs better. Because as we checked in the result section, this algorithm, implemented by Google, was able to send its own packets in a much shorter period of time, and this shows the high efficiency of this algorithm. So, under the same conditions, the BBR algorithm has a better performance among the 3 mentioned algorithms. But this cannot be said for sure and it will depend on other factors.  
 
 ## Q6  
 - TCP Vegas: TCP Vegas uses round trip time for the increase or decrease of the congestion window. Expected and current throughput is measured whose difference is compared with some min and max threshold values. On the basis of the comparison we increase, decrease, or don’t change the congestion window.  
