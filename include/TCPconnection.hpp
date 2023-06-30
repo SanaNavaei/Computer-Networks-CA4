@@ -15,6 +15,6 @@ private:
 public:
   TCPconnection();
   void run();
-}
+};
 
 #endif
