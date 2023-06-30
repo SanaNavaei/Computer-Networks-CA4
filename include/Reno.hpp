@@ -28,14 +28,18 @@ private:
 public:
   Reno(int cwnd_, int ssthresh_);
   void set_timeout();
-  void change_mech(std::string newMech);
+  void change_mech(int newMech);
   void Mult_cwnd(int num);
   void div_cwnd_by(int num);
   void decrement_size(int num);
   void increment_cwnd(int num);
   void SendData();
+  void onRTTUpdate();
+  void run();
 
   int onPacketLoss();
+
+  bool lossProbability();
 };
 
 #endif
