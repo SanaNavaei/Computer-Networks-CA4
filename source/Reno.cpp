@@ -10,14 +10,25 @@ Reno::Reno(int cwnd_, int ssthresh_)
   rtt = 0;
 }
 
-void Reno::change_mech(std::string newMech)
+void Reno::set_timeout()
+{
+  timeout = 2;
+}
+
+void Reno::change_mech(int newMech)
 {
   mechanism = newMech;
+  std::cout << "Mechanism is " << Mechanism[mechanism] << " now!\n";
 }
 
 void Reno::Mult_cwnd(int num)
 {
   cwnd = cwnd * num;
+}
+
+void Reno::div_cwnd_by(int num)
+{
+  cwnd = cwnd / 2;
 }
 
 void Reno::decrement_size(int num)
@@ -93,4 +104,17 @@ int Reno::onPacketLoss()
   return 1;
 }
 
+void Reno::run()
+{
+  while(data_size > 0)
+  {
+    counter = 0;
+    AckLostPacket = 0;
+    SendData();
+    rtt++;
+    if(onPacketLoss() == 0)
+      onRTTUpdate();
 
+    std::cout << "Reno: cwnd = " << cwnd << ", ssthresh = " << ssthresh << ", rtt = " << rtt << std::endl;
+  }
+}
