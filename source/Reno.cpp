@@ -1,9 +1,13 @@
 #include "../include/Reno.hpp"
 
-Reno::Reno(Mechanism_/*attributes*/)
+Reno::Reno(int cwnd_, int ssthresh_)
 {
-  Mechanism = Mechanism_;
-  //etc...
+  cwnd = cwnd_;
+  ssthresh = ssthresh_;
+  mechanism = Slow_Start;
+  LastByteAcked = 0;
+  timeout = 0;
+  rtt = 0;
 }
 
 void Reno::change_mech(std::string newMech)
@@ -63,6 +67,30 @@ void Reno::SendData()
   }
 }
 
-
+int Reno::onPacketLoss()
+{
+  if(timeout == 0)
+  {
+    if(AckLostPacket >= 3)
+    {
+      div_cwnd_by(2);
+      ssthresh = cwnd > 1 ? cwnd : 1;
+      change_mech(Fast_Recovery);
+      return 1;
+    }
+    if(counter != 0)
+    {
+      div_cwnd_by(2);
+      ssthresh = cwnd > 1 ? cwnd : 1;
+      cwnd = 1;
+      change_mech(Slow_Start);
+      set_timeout();
+      return 1;
+    }
+    return 0;
+  }
+  timeout -= 1;
+  return 1;
+}
 
 
