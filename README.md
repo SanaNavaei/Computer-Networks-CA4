@@ -230,6 +230,24 @@ int BBR::onPacketLoss()
   return 0;
 }
 ```
+### onRTTupdate
+If the mechanism variable is set to Startup, the congestion window is multiplied by 2 using the Mult_cwnd function. This indicates that during the startup phase, the congestion window should be increased aggressively. If the mechanism variable is set to drain, the congestion window is multiplied by (1 - drainage) using the Mult_cwnd function. The drainage variable is then decreased by 0.02. This indicates that during the drain phase, the congestion window should be decreased gradually. If the mechanism variable is set to probeBW, the congestion window is increased by 0.25 times its current value. This indicates that during the probe bandwidth phase, the congestion window should be increased to explore available bandwidth. If the mechanism variable is set to probeRTT, the congestion window is set to a fixed value of 30. This indicates that during the probe RTT phase, the congestion window should be set to a specific value.  
+
+```c++
+void BBR::onRTTUpdate()
+{
+  if (mechanism == Startup)
+    Mult_cwnd(2);
+  else if(mechanism == drain)
+  {
+    Mult_cwnd(1 - drainage);
+    drainage = drainage - 0.02;
+  }
+  else if(mechanism == probeBW)
+    cwnd += 0.25 * cwnd;
+  else if(mechanism == probeRTT)
+    cwnd = 30;
+}
 
 # Results  
 ## Reno  
