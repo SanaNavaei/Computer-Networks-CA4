@@ -45,6 +45,71 @@ One of the key advantages of BBR is its ability to react quickly to changing net
 BBR also considers the presence of competing flows in the network. It uses a mechanism called "proportional share" to allocate bandwidth fairly among different flows, ensuring that each flow receives its fair share of the available capacity.
 
 # Code Description  
+## Reno  
+### sendData  
+This function shows how to send a packet in the reno algorithm. First, we check that if the timeout has not reached its end, we do not send a packet. The function then enters a loop that iterates from AckTemp to the minimum value between DATA_SIZE (which represents the total size of the data) and AckTemp + cwnd (which represents the congestion window size). This loop is responsible for sending multiple data packets. Inside the loop, different modes are checked. The different modes are:  
+- When a package is lost  
+- When the package is sent to the recipient  
+- When the number of acks received is equal to 3 or more  
+In the third case, we have to resend the packets from where they were lost. The code of this section is as follows.  
+
+```c++
+void Reno::SendData()
+{
+  if (timeout != 0)
+    return;
+
+  int AckTemp = LastByteAcked;
+  for (int i = AckTemp; i < DATA_SIZE && i < AckTemp + cwnd; i++)
+  {
+    bool lossProb = lossProbability();
+    if(lossProb)
+      counter += 1;
+    else if(counter == 0)
+    {
+      LastByteAcked += 1;
+      data_size -= 1;
+    }
+    else
+    {
+      AckLostPacket += 1;
+      if (AckLostPacket == 3)
+        break;
+    }
+  }
+}
+```
+
+### onRTTupdate
+The purpose of this function is to update the congestion window size (cwnd) based on the current congestion control mechanism.  
+The function first checks the current mechanism and performs different actions accordingly.  
+If the mechanism is Slow_Start, it checks if cwnd is equal to ssthresh. If it is, it changes the mechanism to AIMD. If cwnd is less than ssthresh, it multiplies cwnd by 2. If cwnd is greater than ssthresh, it sets cwnd equal to ssthresh.  
+If the mechanism is Fast_Recovery, it changes the mechanism to AIMD and increments cwnd by 1.  
+If the mechanism is AIMD, it simply increments cwnd by 1.  
+```c++
+void Reno::onRTTUpdate()
+{
+  if(mechanism == Slow_Start)
+  {
+    if (cwnd == ssthresh)
+      change_mech(AIMD);
+    if (cwnd < ssthresh)
+      Mult_cwnd(2);
+    else if(cwnd > ssthresh)
+      cwnd = ssthresh;
+  }
+  else if(mechanism == Fast_Recovery)
+  {
+    change_mech(AIMD);
+    increment_cwnd(1);
+  }
+  else if(mechanism == AIMD)
+  {
+    increment_cwnd(1);
+  }
+}
+```
+
 ### onPacketLoss
 The purpose of this function is to handle packet loss events and update the congestion window size (cwnd) and congestion control mechanism accordingly.  
 The function first checks if the timeout value is equal to 0. If it is, it means that a timeout event has occurred. In this case, the function checks if AckLostPacket (the number of consecutive lost acknowledgments) is greater than or equal to 3. If it is, the function divides cwnd by 2, sets ssthresh to either cwnd or 1 (whichever is greater), changes the congestion control mechanism to Fast_Recovery, and returns 1.  
