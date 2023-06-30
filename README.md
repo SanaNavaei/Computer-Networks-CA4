@@ -45,6 +45,42 @@ One of the key advantages of BBR is its ability to react quickly to changing net
 BBR also considers the presence of competing flows in the network. It uses a mechanism called "proportional share" to allocate bandwidth fairly among different flows, ensuring that each flow receives its fair share of the available capacity.
 
 # Code Description  
+### onPacketLoss
+The purpose of this function is to handle packet loss events and update the congestion window size (cwnd) and congestion control mechanism accordingly.  
+The function first checks if the timeout value is equal to 0. If it is, it means that a timeout event has occurred. In this case, the function checks if AckLostPacket (the number of consecutive lost acknowledgments) is greater than or equal to 3. If it is, the function divides cwnd by 2, sets ssthresh to either cwnd or 1 (whichever is greater), changes the congestion control mechanism to Fast_Recovery, and returns 1.  
+If AckLostPacket is not greater than or equal to 3, the function checks if counter is not equal to 0. In this case, the function divides cwnd by 2, sets ssthresh to either cwnd or 1, sets cwnd to 1, changes the congestion control mechanism to Slow_Start, sets the timeout value, and returns 1.  
+If neither of these conditions is met, it means that the timeout value is not equal to 0. In this case, the function decrements the timeout value by 1 and returns 1.  
+```c++
+int Reno::onPacketLoss()
+{
+  if(timeout == 0)
+  {
+    if(AckLostPacket >= 3)
+    {
+      div_cwnd_by(2);
+      ssthresh = cwnd > 1 ? cwnd : 1;
+      change_mech(Fast_Recovery);
+      return 1;
+    }
+    if(counter != 0)
+    {
+      div_cwnd_by(2);
+      ssthresh = cwnd > 1 ? cwnd : 1;
+      cwnd = 1;
+      change_mech(Slow_Start);
+      set_timeout();
+      return 1;
+    }
+    return 0;
+  }
+  timeout -= 1;
+  return 1;
+}
+```
+
+## NewReno
+
+## BBR
 
 # Results  
 
