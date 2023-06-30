@@ -76,3 +76,10 @@ It aims to achieve higher bandwidth and lower latencies for internet traffic. BB
 ## Q5  
 
 ## Q6  
+- TCP Vegas: TCP Vegas uses round trip time for the increase or decrease of the congestion window. Expected and current throughput is measured whose difference is compared with some min and max threshold values. On the basis of the comparison we increase, decrease, or don’t change the congestion window.  
+- TCP cubic: TCP CUBIC is a congestion control algorithm that arises with the idea of taking advantage of the fact that today’s communications links tend to have increasingly higher bandwidth levels.  
+In a network composed of wide bandwidth links, a congestion control algorithm that slowly increases the transmission rate may end up wasting the capacity of the links.  
+The intention is to have an algorithm that works with congestion windows whose incremental processes are more aggressive, but are restricted from overloading the network.  
+- Proportional Rate Reduction: This algorithm determines the amount of data sent by TCP during loss recovery. PRR minimizes excess window adjustments, and the actual window size at the end of recovery will be as close as possible to the ssthresh, as determined by the congestion control algorithm.  
+
+TCP Vegas has several advantages over TCP Reno and TCP New Reno. One of them is that it can achieve high throughput and low delay, as it avoids congestion and packet losses by maintaining a small buffer at the bottleneck link. Another one is that it can be fair to other TCP Vegas flows, as it allocates the bandwidth proportionally to the RTT of each flow.  
