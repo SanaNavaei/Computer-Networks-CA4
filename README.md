@@ -144,6 +144,48 @@ int Reno::onPacketLoss()
 ```
 
 ## NewReno
+The way of implementing the NewReno algorithm is almost similar to the Reno algorithm and they are slightly different only in the sendData() function. The difference is that sack is used here.  
+Selective Acknowledgment (SACK) is used to improve the congestion control mechanism in TCP. SACK allows the receiver to inform the sender about the specific packets that have been successfully received, even if there are missing or out of order packets.  
+```c++
+void NewReno::SendData()
+{
+  if (timeout != 0)
+    return;
+
+  int AckTemp = LastByteAcked;
+  for (int i = AckTemp; i < DATA_SIZE && i < AckTemp + cwnd + sack_counter; i++)
+  {
+    bool lossProb = lossProbability();
+    if(acked[i])
+    {
+      if(counter == 0)
+      {
+        LastByteAcked += 1;
+        data_size -= 1;
+      }
+      sack_counter += 1;
+    }
+    else if(lossProb)
+    {
+      counter += 1;
+      acked[i] = 0;
+    }
+    else if(counter == 0)
+    {
+      LastByteAcked += 1;
+      data_size -= 1;
+      acked[i] = 1;
+    }
+    else
+    {
+      AckLostPacket += 1;
+      acked[i] = 1;
+      if (AckLostPacket == 3)
+        break;
+    }
+  }
+}
+```
 
 ## BBR
 
